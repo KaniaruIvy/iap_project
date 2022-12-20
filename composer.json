@@ -43,7 +43,11 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "platform-check": false,
+        "platform": {
+            "php": "8.0.7"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
