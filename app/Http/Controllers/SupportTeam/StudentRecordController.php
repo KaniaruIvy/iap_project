@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Mail;
 
 class StudentRecordController extends Controller
 {
@@ -48,22 +49,26 @@ class StudentRecordController extends Controller
         $data['nationals'] = $this->loc->getAllNationals();
         return view('pages.support_team.students.add', $data);
     }
+    
 
     public function store(StudentRecordCreate $req)
     {
        $data =  $req->only(Qs::getUserRecord());
        $sr =  $req->only(Qs::getStudentData());
 
+
         $ct = $this->my_class->findTypeByClass($req->my_class_id)->code;
        /* $ct = ($ct == 'J') ? 'JSS' : $ct;
         $ct = ($ct == 'S') ? 'SS' : $ct;*/
-
+        
         $data['user_type'] = 'student';
         $data['name'] = ucwords($req->name);
         $data['code'] = strtoupper(Str::random(10));
-        $data['password'] = Hash::make('student');
+        $data['onepassword'] = Str::random(30);
+        $data['password'] = Hash::make($data['onepassword']);
         $data['photo'] = Qs::getDefaultUserImage();
         $adm_no = $req->adm_no;
+        $data['email']=$req->email;
         $data['username'] = strtoupper(Qs::getAppCode().'/'.$ct.'/'.$sr['year_admitted'].'/'.($adm_no ?: mt_rand(1000, 99999)));
 
         if($req->hasFile('photo')) {
@@ -81,6 +86,15 @@ class StudentRecordController extends Controller
         $sr['session'] = Qs::getSetting('current_session');
 
         $this->student->createRecord($sr); // Create Student
+
+        //send email
+        $data2 = array('name'=>"Virat Gandhi");
+   
+        Mail::send(['text'=>'mail'], $data, function($message) {
+         $message->to('ivy.kaniaru@strathmore.edu', 'Student')->subject
+            ('Acceptance Letter');
+         $message->from('ivy.kaniaru@strathmore.edu','IAP University');
+        });
         return Qs::jsonStoreOk();
     }
 

@@ -32,7 +32,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Email address: </label>
-                                <input type="email" value="{{ old('email') }}" name="email" class="form-control" placeholder="Email Address">
+                                <input type="email" value="{{ old('email') }}" name="email" class="form-control" placeholder="Email Address" required>
                             </div>
                         </div>
 
