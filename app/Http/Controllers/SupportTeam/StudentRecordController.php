@@ -95,6 +95,7 @@ class StudentRecordController extends Controller
             ('Acceptance Letter');
          $message->from('ivy.kaniaru@strathmore.edu','IAP University');
         });
+        
         return Qs::jsonStoreOk();
     }
 
