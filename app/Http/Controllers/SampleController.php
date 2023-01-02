@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 
 class SampleController extends Controller
 {
-    /**
+     /**
      * @OA\Get(
      *   path="/api/sample",
      *   summary="Sample",
+     *   tags={"Sample"},
+     *   operationId="sample",
      *   @OA\Response(response=200, description="successful operation")
      * )
      *

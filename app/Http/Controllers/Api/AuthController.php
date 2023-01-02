@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Hash;
-use App\User;
+use App\Models\User;
 class AuthController extends Controller
 {
       /**
@@ -145,4 +145,140 @@ class AuthController extends Controller
               return response()->json(['success' => $success])->setStatusCode(200);
           }
       }
+
+    /**
+        * @OA\Put(
+        * path="/api/update",
+        * operationId="authupdate",
+        * tags={"Update"},
+        * summary="User Update",
+        * description="Update user details",
+        *     
+        *       @OA\Parameter(
+        *      name="name",
+        *      in="query",
+        *      required=true,
+        *      @OA\Schema(
+        *           type="string"
+        *      )
+        *   ),
+        *  @OA\Parameter(
+        *      name="email",
+        *      in="query",
+        *      required=true,
+        *      @OA\Schema(
+        *           type="string"
+        *      )
+        *   ),
+        *   @OA\Parameter(
+        *       name="mobile_number",
+        *      in="query",
+        *      required=true,
+        *      @OA\Schema(
+        *           type="integer"
+        *      )
+        *   ),
+        *   @OA\Parameter(
+        *      name="password",
+        *      in="query",
+        *      required=true,
+        *      @OA\Schema(
+        *           type="string"
+        *      )
+        *   ),
+        *      @OA\Response(
+        *          response=201,
+        *          description="Update Successful",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Update Successful",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
+        public function update(Request $request)
+        {
+          $request->validate([
+              'name' => 'required',
+              'email' => 'required|email',
+              'password' => 'required',
+              'mobile_number' => 'required',
+          ]);
+          $email=$request->email;
+          $id = User::select('id')
+              ->where('email','=',$email)
+              ->get();
+          $user=User::find($id);
+          if($user){
+            $user->name=$request->name;
+            $user->email=$request->email;
+            $user->password=Hash::make($request->password);
+            $user->mobile_number=$request->mobile_number;
+            $user->update();
+  
+            return response()->json(['message'=>'User record updated successfully'],200);
+          }else{
+              return response()->json(['message'=>'User not found'],404);
+          }
+        }
+        /**
+        * @OA\PUT(
+        * path="/api/delete",
+        * operationId="Delete",
+        * tags={"Delete"},
+        * summary="User Delete",
+        * description="Delete user ",
+        *     
+        
+        *  @OA\Parameter(
+        *      name="email",
+        *      in="query",
+        *      required=true,
+        *      @OA\Schema(
+        *           type="string"
+        *      )
+        *   ),
+       
+        *      @OA\Response(
+        *          response=201,
+        *          description="Delete4 Successful",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Delete Successful",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
+
+  public function destroy($request){
+    $request->validate([
+        'email' => 'required|email',
+    ]);
+    $email=$request->email;
+    $user=User::find($email);
+    if($user){
+        $user->delete();
+        return response()->json(['message'=>'User record deleted successfully'],200);
+  }else{
+    return response()->json(['message'=>'User not found'],404);
+}
+}
 }
