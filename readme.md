@@ -1,109 +1,25 @@
-## **Laravel School Management System** 
+## **IAP University School Management System** 
 
-**LAVSMS** is developed for educational institutions like schools and colleges built on Laravel 8
+The school management system is a revolutionary platform that aims to bring efficiency and organisation to the administrative and academic functions of educational institutions. Developed using the Laravel framework, it offers a range of features that cater to the needs of students, teachers, and parents alike.
 
-**SCREENSHOTS** 
+For students, the system provides access to course materials, online assignments, and assessments, allowing them to stay on top of their academic progress from anywhere. It also includes a messaging system that allows students to communicate with their teachers and classmates.
 
-**Dashboard**
-<img src="https://i.ibb.co/D4T0z6T/dashboard.png" alt="dashboard" border="0">
+Teachers can use the system to manage their classes, create and distribute assignments, and track the progress of their students. They can also use the integrated calendar to schedule events and appointments.
 
-**Login**
-<img src="https://i.ibb.co/Rh1Bfwk/login.png" alt="login" border="0">
+The system also includes a parent portal that allows parents to stay informed about their child's academic progress and communicate with teachers.
 
-**Student Marksheet**
-<img src="https://i.ibb.co/GCgv5ZR/marksheet.png" alt="marksheet" border="0">
-
-**System Settings**
-<img src="https://i.ibb.co/Kmrhw69/system-settings.png" alt="system-settings" border="0">
-
-**Print Marksheet**
-<div style="clear: both"> </div>
-<img src="https://i.ibb.co/5c1GHCj/capture-20210530-115521-crop.png" alt="print-marksheet">
-
-**Print Tabulation Sheet & Marksheet**
-<img src="https://i.ibb.co/QmscPfn/capture-20210530-115802.png" alt="tabulation-sheet" border="0">
-
-<hr />  
-
-There are 7 types of user accounts. They include:
- 
-Administrators (Super Admin & Admin)
-- Librarian
-- Accountant
-- Teacher
-- Student
-- Parent
 
 **Requirements** 
-
-Check Laravel 8 Requirements https://laravel.com/docs/8.x
+- Composer
+- Node.js (14.17.4 and above)
 
 **Installation**
 - Install dependencies (composer install)
+- Install Node dependencies (npm install)
 - Set Database Credentials & App Settings in dotenv file (.env)
 - Migrate Database (php artisan migrate)
 - Database seed (php artisan db:seed)
 
-**Login Credentials**
-After seeding. Login details as follows:
-
-| Account Type  | Username | Email | Password |
-| ------------- | -------- | ----- | -------- |
-| Super Admin | cj | cj@cj.com | cj |
-|  Admin | admin | admin@admin.com | cj |
-|  Teacher | teacher | teacher@teacher.com | cj |
-|  Parent | parent | parent@parent.com | cj |
-|  Accountant | accountant | accountant@accountant.com | cj |
-|  Student | student | student@student.com | cj |
-
-#### **FUNCTIONS OF ACCOUNTS** 
-
-**-- SUPER ADMIN**
-- Only Super Admin can delete any record
-- Create any user account
- 
-**-- Administrators (Super Admin & Admin)**
-
-- Manage students class/sections
-- View marksheet of students
-- Create, Edit and manage all user accounts & profiles
-- Create, Edit and manage Exams & Grades
-- Create, Edit and manage Subjects
-- Manage noticeboard of school
-- Notices are visible in calendar in dashboard
-- Edit system settings
-- Manage Payments & fees
-
-**-- ACCOUNTANT**
-- Manage Payments & fees
-- Print Payment Receipts
-
-**-- LIBRARIAN**
-- Manage Books in the Library
-
-**-- TEACHER**
-- Manage Own Class/Section
-- Manage Exam Records for own Subjects
-- Manage Timetable if Assigned as Class Teacher
-- Manage own profile
-- Upload Study Materials
-
-**-- STUDENT**
-- View teacher profile
-- View own class subjects
-- View own marks and class timetable
-- View Payments
-- View library and book status
-- View noticeboard and school events in calendar
-- Manage own profile
-
-**-- PARENT**
-- View teacher profile
-- View own child's marksheet (Download/Print PDF)
-- View own child's Timetable
-- View own child's payments
-- View noticeboard and school events in calendar
-- Manage own profile
 
 
 
