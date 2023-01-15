@@ -20,6 +20,7 @@
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.8",
         "facade/ignition": "^2.5",
+        "knuckleswtf/scribe": "^4.11",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
